@@ -37,15 +37,11 @@ Template('colourwords1.csv', row =>
     // load images
     // objects
     newImage("object1", row.png1)
-        .size(250, 250)
+        .size(200, 200)
         .center()
     ,
     newImage("object2", row.png2)
-        .size(250, 250)
-        .center()
-    ,
-    newImage("square", row.square)
-        .size(300, 300)
+        .size(200, 200)
         .center()
     ,
     // mic stages
@@ -84,9 +80,9 @@ Template('colourwords1.csv', row =>
         .print()
     ,
     // print images
-     newCanvas("show", 650, 600)
-        .add(25, 275, getImage("object1"))
-        .add(400, 275, getImage("object2"))
+    newCanvas("side-by-side", 450, 200)
+        .add(0, 0, getImage("object1"))
+        .add(250, 0, getImage("object2"))
         .center()
         .print()
         .log()
@@ -113,17 +109,14 @@ Template('colourwords1.csv', row =>
         .add(0, 0, getImage("3"))
     ,
     // disambiguation
-    getImage("object1")
-        .remove()
-    ,
-    getCanvas("show")
-        .add(0, 250, getImage("square"))
+    getCanvas("side-by-side")
+        .add(0, 0,
+            newCanvas("disambiguation-square", 225, 200).color("#B0B0B0"))
+        .add(0, 0, getImage("object1"))
+        .add(250, 0, getImage("object2"))
+        .center()
         .print()
         .log()
-    ,
-    getCanvas("show")
-        .add(25, 275, getImage("object1"))
-        .print()
     ,
     // mic animation continues
     newTimer("time3", 429)
@@ -238,9 +231,9 @@ Template('colourwords2.csv', row =>
         .print()
     ,
     // print images
-     newCanvas("show", 650, 300)
-        .add(25, 25, getImage("object1"))
-        .add(375, 25, getImage("object2"))
+    newCanvas("side-by-side", 450, 200)
+        .add(0, 0, getImage("object1"))
+        .add(250, 0, getImage("object2"))
         .center()
         .print()
         .log()
@@ -267,17 +260,14 @@ Template('colourwords2.csv', row =>
         .add(0, 0, getImage("3"))
     ,
     // disambiguation
-    getImage("object2")
-        .remove()
-    ,
-    getCanvas("show")
-        .add(350, 0, getImage("square"))
+    getCanvas("side-by-side")
+        .add(200, 0,
+            newCanvas("disambiguation-square", 225, 200).color("#B0B0B0"))
+        .add(0, 0, getImage("object1"))
+        .add(250, 0, getImage("object2"))
+        .center()
         .print()
         .log()
-    ,
-    getCanvas("show")
-        .add(375, 25, getImage("object2"))
-        .print()
     ,
     // mic animation continues
     newTimer("time3", 429)
