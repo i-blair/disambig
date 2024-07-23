@@ -1,0 +1,331 @@
+// prefix
+PennController.ResetPrefix(null)
+
+// turn off debug before publishing
+// DebugOff()
+
+// participant ID function
+function getRandomStr(){
+    const LENGTH = 4
+    const SOURCE = "abcdefghijklmnopqrstuvwxyz"
+    let result = ''
+
+    for(let i=0; i<LENGTH; i++){
+        result += SOURCE[Math.floor(Math.random() * SOURCE.length)];
+  }
+  return result
+}
+
+// assign participant ID
+const subject_id = getRandomStr();
+
+// sequence
+Sequence(randomize(endsWith("colour")))
+
+// template - left
+Template('colourwords1.csv', row =>
+    newTrial("1colour",
+        defaultText
+            .css('font-family', 'Arial')
+            .center()
+    ,
+    // intertrial interval 1.5 seconds
+    newTimer("ITI", 2000)
+        .start()
+        .wait()
+    ,
+    // load images
+    // objects
+    newImage("object1", row.png1)
+        .size(250, 250)
+        .center()
+    ,
+    newImage("object2", row.png2)
+        .size(250, 250)
+        .center()
+    ,
+    newImage("square", row.square)
+        .size(300, 300)
+        .center()
+    ,
+    // mic stages
+    newImage("1", "26.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("2", "27.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("3", "28.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("4", "29.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("5", "30.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("6", "31.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("7", "32.png")
+        .size(100, 100)
+        .center()
+    ,
+    // print mic
+    newCanvas("mic", 100, 100)
+        .add(0, 0, getImage("1"))
+        .center()
+        .print()
+    ,
+    // print images
+     newCanvas("show", 650, 600)
+        .add(25, 275, getImage("object1"))
+        .add(400, 275, getImage("object2"))
+        .center()
+        .print()
+        .log()
+    ,
+    // mic animation
+    newTimer("time1", 429)
+        .start()
+        .wait()
+    ,
+    getImage("1")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("2"))
+    ,
+    newTimer("time2", 429)
+        .start()
+        .wait()
+    ,
+    getImage("2")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("3"))
+    ,
+    // disambiguation
+    getImage("object1")
+        .remove()
+    ,
+    getCanvas("show")
+        .add(0, 250, getImage("square"))
+        .print()
+        .log()
+    ,
+    getCanvas("show")
+        .add(25, 275, getImage("object1"))
+        .print()
+    ,
+    // mic animation continues
+    newTimer("time3", 429)
+        .start()
+        .wait()
+    ,
+    getImage("3")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("4"))
+    ,
+    newTimer("time4", 429)
+        .start()
+        .wait()
+    ,
+    getImage("4")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("5"))
+    ,
+    newTimer("time5", 429)
+        .start()
+        .wait()
+    ,
+    getImage("5")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("6"))
+    ,
+    newTimer("time6", 429)
+        .start()
+        .wait()
+    ,
+    getImage("6")
+        .remove()
+    ,
+    newTimer("time7", 429)
+        .start()
+        .wait()
+    ,
+    // end trial
+    clear()
+    )
+    .log("genders", row.gender)
+    .log("object1", row.object1)
+    .log("object2", row.object2)
+    .log("ID", subject_id)
+)
+
+// template - right
+Template('colourwords2.csv', row =>
+    newTrial("2colour",
+        defaultText
+            .css('font-family', 'Arial')
+            .center()
+    ,
+    // intertrial interval 1.5 seconds
+    newTimer("ITI", 2000)
+        .start()
+        .wait()
+    ,
+    // load images
+    // objects
+    newImage("object1", row.png1)
+        .size(250, 250)
+        .center()
+    ,
+    newImage("object2", row.png2)
+        .size(250, 250)
+        .center()
+    ,
+    newImage("square", row.square)
+        .size(300, 300)
+        .center()
+    ,
+    // mic stages
+    newImage("1", "26.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("2", "27.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("3", "28.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("4", "29.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("5", "30.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("6", "31.png")
+        .size(100, 100)
+        .center()
+    ,
+    newImage("7", "32.png")
+        .size(100, 100)
+        .center()
+    ,
+    // print mic
+    newCanvas("mic", 100, 100)
+        .add(0, 0, getImage("1"))
+        .center()
+        .print()
+    ,
+    // print images
+     newCanvas("show", 650, 300)
+        .add(25, 25, getImage("object1"))
+        .add(375, 25, getImage("object2"))
+        .center()
+        .print()
+        .log()
+    ,
+    // mic animation
+    newTimer("time1", 429)
+        .start()
+        .wait()
+    ,
+    getImage("1")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("2"))
+    ,
+    newTimer("time2", 429)
+        .start()
+        .wait()
+    ,
+    getImage("2")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("3"))
+    ,
+    // disambiguation
+    getImage("object2")
+        .remove()
+    ,
+    getCanvas("show")
+        .add(350, 0, getImage("square"))
+        .print()
+        .log()
+    ,
+    getCanvas("show")
+        .add(375, 25, getImage("object2"))
+        .print()
+    ,
+    // mic animation continues
+    newTimer("time3", 429)
+        .start()
+        .wait()
+    ,
+    getImage("3")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("4"))
+    ,
+    newTimer("time4", 429)
+        .start()
+        .wait()
+    ,
+    getImage("4")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("5"))
+    ,
+    newTimer("time5", 429)
+        .start()
+        .wait()
+    ,
+    getImage("5")
+        .remove()
+    ,
+    getCanvas("mic")
+        .add(0, 0, getImage("6"))
+    ,
+    newTimer("time6", 429)
+        .start()
+        .wait()
+    ,
+    getImage("6")
+        .remove()
+    ,
+    newTimer("time7", 429)
+        .start()
+        .wait()
+    ,
+    // end trial
+    clear()
+    )
+    .log("genders", row.gender)
+    .log("object1", row.object1)
+    .log("object2", row.object2)
+    .log("ID", subject_id)
+)
